@@ -1,0 +1,22 @@
+.btn_ch {
+  background-color: black;
+  color: cornsilk;
+  padding: 0.7em;
+  font-family: fantasy;
+}
+.top {
+  width: 100%;
+  font-size: medium;
+  height: 46px;
+}
+.total {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.Pay {
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+}
+.items {
+}

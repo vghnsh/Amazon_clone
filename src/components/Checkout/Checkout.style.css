@@ -1,0 +1,25 @@
+.MainCheckout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 3px;
+}
+.check_bot {
+  display: flex;
+}
+.img_ch {
+  height: 30%;
+  object-fit: contain;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.price {
+}
+.btn_ch {
+  background-color: black;
+  color: cornsilk;
+  padding: 0.7em;
+  font-family: fantasy;
+}

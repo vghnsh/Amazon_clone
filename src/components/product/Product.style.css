@@ -1,0 +1,29 @@
+.product_main {
+  display: flex;
+  flex-direction: column;
+
+  background-color: rgb(255 255 255 / 75%);
+  z-index: 1;
+  border: solid 2px;
+}
+.image {
+  background-color: black;
+  height: 20em;
+  width: 100%;
+}
+.price {
+  display: flex;
+  justify-content: space-evenly;
+}
+.btn {
+  background-color: black;
+  color: cornsilk;
+  padding: 0.4em;
+  font-family: fantasy;
+  margin-bottom: 2px;
+}
+@media screen and (max-width: 800px) {
+  .image {
+    height: 15em;
+  }
+}
