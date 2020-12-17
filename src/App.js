@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import './App.css';
+import './App.style.scss';
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom';
 import Header from './components/header/Header.component';
 import Banner from './components/banner/Banner.component';

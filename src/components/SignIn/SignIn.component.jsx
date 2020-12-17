@@ -1,129 +1,99 @@
-import React,{useState} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-
-import { Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-
+import React, { useState } from 'react';
+import './Signin.style.scss';
+import {TextField ,Button} from '@material-ui/core';
+import {Link} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import firebase from 'firebase';
 import {auth} from '../../firebase';
 
-import { useHistory } from "react-router-dom";
+function Signin() {
+    const [mail, setMail]= useState('');
+    const [password, setPassword]= useState('');
+    const history = useHistory();
 
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
-export default function SignIn() {
-  
-
-  const [email, setEmail]= useState('');
-  const [password,setPassword]=useState('');
-  
-  const history = useHistory();
-  const classes = useStyles();
-
-  
-  const signIn=(event)=>{
-    event.preventDefault();
-    
-    auth.signInWithEmailAndPassword(email,password)
-    .then(auth=>{history.push("/")})
-    .catch((error)=>alert(error.message));
-
-    setEmail('');
-    setPassword('');
+   
     
     
-  };
-  
-
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
-              
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
-              
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-      
-              < Button
-              onClick={signIn}
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                >
-                Sign In
-              </Button>
-
+    const signInWithGoogle = () => {
+        const provider =new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({propmt:'select_account'});
+        auth.signInWithPopup(provider)
+          .then(() => {
+            history.push("/");
+          });
           
-        </form>
-        <Grid container>
-            <Grid>
-              <Link to="/SignUp" variant="body2">
-                "Don't have an account? Sign Up"
-              </Link>
-              </Grid>
-            
-          </Grid>
-      </div>
+      };
+
+      const signIn=(event)=>{
+        event.preventDefault();
+        
+        auth.signInWithEmailAndPassword(mail,password)
+        .then(auth=>{history.push("/")})
+        .catch((error)=>alert(error.message));
+        setMail('');
+        setPassword('');
+        
+        
+      };
+
       
-    </Container>
-  );
+   
+    return (
+      <div className="loghead">
+        <div className='signin'>
+            <div>
+            <h1 className='title'>SignIN</h1>
+            </div>
+            
+            <div className='signDiv'>
+            <Button onClick={signInWithGoogle} className='GoogleSign'>
+                Sign In with Google (Recommanded)
+            </Button>
+
+            <p className='center'>or</p>
+    
+            <form className='signForm' noValidate autoComplete="off">
+                <TextField
+                    className='mail'
+                    id="outlined-secondary"
+                    label="E-mail"
+                    variant="outlined"
+                    color="primary"
+                    value={mail}
+                    onChange={(e)=>setMail(e.target.value)}
+                />
+                
+                <TextField
+                    className='password'
+                    type='password'
+                    id="outlined-secondary"
+                    label="Password"
+                    variant="outlined"
+                    color="primary"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                />
+            
+           
+            </form>
+            <Button onClick={signIn}  className='signBTN'>
+                Sign In 
+            </Button>
+            
+           <div className="gosign center">
+           <Link className='link' to='/SignUP'>
+               Go to SignUP 
+            </Link>
+           </div>
+         
+            
+            
+            </div>
+            
+        </div>
+      </div>
+        
+    )
 }
+
+export default Signin;

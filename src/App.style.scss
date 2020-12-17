@@ -1,6 +1,15 @@
 * {
   margin: 0px;
 }
+Link {
+  padding-top: 1.5em;
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 
 .products {
   z-index: 1;

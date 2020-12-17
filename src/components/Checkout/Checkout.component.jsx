@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { useStateValue } from '../../StateProvider';
 import './Checkout.style.css';
 
-import Wobble from 'react-reveal/Wobble';
+import Jump from 'react-reveal/Jump';
 
 function Checkout({id,name,imageUrl,price}) {
     const [,dispatch]= useStateValue();
@@ -15,7 +15,7 @@ function Checkout({id,name,imageUrl,price}) {
     }
 
     return (
-        <Wobble>
+        <Jump>
 
                 <div className="MainCheckout">
             <div className="center">
@@ -41,7 +41,7 @@ function Checkout({id,name,imageUrl,price}) {
             
             
         </div>
-        </Wobble>
+        </Jump>
     )
 }
 
